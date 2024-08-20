@@ -10,6 +10,9 @@ function matchPattern(inputLine: string, pattern: string): boolean {
   } else if (pattern === "\\d") {
     // 数字のパターンの場合
     return inputLine.match(/\d/) !== null;
+  } else if (pattern === "\\w") {
+    // 英数字のパターンの場合
+    return inputLine.match(/\w/) !== null;
   } else {
     throw new Error(`Unhandled pattern: ${pattern}`);
   }
