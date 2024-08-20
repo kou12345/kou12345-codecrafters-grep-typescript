@@ -5,14 +5,18 @@ const inputLine: string = await Bun.stdin.text();
 
 function matchPattern(inputLine: string, pattern: string): boolean {
   if (pattern.length === 1) {
-    // 一文字だけのパターンの場合
+    // 一文字だけのパターン
     return inputLine.includes(pattern);
   } else if (pattern === "\\d") {
-    // 数字のパターンの場合
+    // 数字のパターン
     return inputLine.match(/\d/) !== null;
   } else if (pattern === "\\w") {
-    // 英数字のパターンの場合
+    // 英数字のパターン
     return inputLine.match(/\w/) !== null;
+  } else if (pattern.startsWith("[") && pattern.endsWith("]")) {
+    // 肯定的な文字グループ
+    const chars = pattern.slice(1, -1);
+    return inputLine.split("").some((c) => chars.includes(c));
   } else {
     throw new Error(`Unhandled pattern: ${pattern}`);
   }
